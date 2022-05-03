@@ -3,4 +3,9 @@
     <string name="breaking_news">Breaking News</string>
     <string name="search_news">Search News</string>
     <string name="bookmarked">Bookmarked</string>
+    <string name="news_source">News Source</string>
+    <string name="news_date">News Date</string>
+    <string name="news_image">News Image</string>
+    <string name="sample_title">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="sample_content">The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software.</string>
 </resources>
