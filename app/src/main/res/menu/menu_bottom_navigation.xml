@@ -4,21 +4,21 @@
     >
 
     <item
-        android:id="@+id/bottomMenuBreakingNews"
+        android:id="@+id/fragmentNews"
         android:title="@string/breaking_news"
         android:icon="@drawable/ic_baseline_newspaper_24"
         android:iconTint="@color/black"
         />
 
     <item
-        android:id="@+id/bottomMenuSearchNews"
+        android:id="@+id/fragmentSearch"
         android:title="@string/search_news"
         android:icon="@drawable/ic_twotone_search_24"
         android:iconTint="@color/black"
         />
 
     <item
-        android:id="@+id/bottomMenuSaveNews"
+        android:id="@+id/fragmentBookmark"
         android:title="@string/bookmarked"
         android:icon="@drawable/ic_baseline_bookmarks_24"
         android:iconTint="@color/black"

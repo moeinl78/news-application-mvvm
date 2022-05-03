@@ -2,7 +2,8 @@ package ir.ariyana.news_application_mvvm.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.ActivityMainBinding
 
@@ -15,23 +16,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.mainActivityBottomNavigation.setOnItemSelectedListener { item ->
+        val bottomNavigation = binding.mainActivityBottomNavigation
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainActivityFragmentHost)
 
-            when(item.itemId) {
-
-                R.id.bottomMenuBreakingNews -> {
-
-                }
-
-                R.id.bottomMenuSearchNews -> {
-
-                }
-
-                R.id.bottomMenuSaveNews -> {
-
-                }
-            }
-            true
-        }
+        NavigationUI
+            .setupWithNavController(bottomNavigation, navHostFragment!!.findNavController())
     }
 }
