@@ -20,7 +20,7 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
     var breakingNewsPage = 1
 
     init {
-        getBreakingNews("uk")
+        getBreakingNews("us")
     }
 
     private fun getBreakingNews(countryCode : String) {

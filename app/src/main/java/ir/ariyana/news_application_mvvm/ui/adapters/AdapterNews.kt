@@ -1,5 +1,6 @@
 package ir.ariyana.news_application_mvvm.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -8,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.ariyana.news_application_mvvm.databinding.ItemRecyclerBinding
 import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
+import ir.ariyana.news_application_mvvm.utils.Constants.TAG_MAIN
 
 class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: NewDataClass.Article) {
-
             binding.itemRecyclerTitleText.text = item.title
             binding.itemRecyclerContentText.text = item.content
             binding.itemRecyclerTextSource.text = item.source.name
@@ -35,7 +36,7 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
      * you need to use diffUtil
      * to compare data and see which one's are new!
      */
-    private val diffUtil = object : DiffUtil.ItemCallback<NewDataClass.Article>() {
+    private val differCallback = object : DiffUtil.ItemCallback<NewDataClass.Article>() {
 
         override fun areItemsTheSame(
             oldItem: NewDataClass.Article,
@@ -52,7 +53,7 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
         }
     }
 
-    val differ = AsyncListDiffer(this, diffUtil)
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -64,6 +65,7 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
+        Log.i(TAG_MAIN, differ.currentList.size.toString())
         return differ.currentList.size
     }
 

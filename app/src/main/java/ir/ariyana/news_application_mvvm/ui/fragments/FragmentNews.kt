@@ -1,6 +1,7 @@
 package ir.ariyana.news_application_mvvm.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.news_application_mvvm.databinding.FragmentBreakingNewsBinding
 import ir.ariyana.news_application_mvvm.ui.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
+import ir.ariyana.news_application_mvvm.utils.Constants
 import ir.ariyana.news_application_mvvm.utils.Resource
 
 class FragmentNews : Fragment() {
@@ -42,20 +44,20 @@ class FragmentNews : Fragment() {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { newsResponse ->
-                        adapter.differ.submitList(newsResponse.articles)
+                        Log.i(Constants.TAG_MAIN, newsResponse.toString())
+                        adapter.differ.submitList(newsResponse.articles.toMutableList())
                     }
                 }
 
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let {
-
+                        Log.e(Constants.TAG_MAIN, it)
                     }
                 }
 
                 is Resource.Loading -> {
                     showProgressBar()
-
                 }
             }
         })
@@ -63,10 +65,8 @@ class FragmentNews : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = AdapterNews()
-        binding.fragmentNewsRecyclerView.apply {
-            adapter = adapter
-            layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
-        }
+        binding.fragmentNewsRecyclerView.adapter = adapter
+        binding.fragmentNewsRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
     }
 
     private fun hideProgressBar() {
