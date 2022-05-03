@@ -1,4 +1,4 @@
-package ir.ariyana.news_application_mvvm.adapters
+package ir.ariyana.news_application_mvvm.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -20,15 +20,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repositoryMain = RepositoryMain(DatabaseNews(this))
-        val viewModelMainFactory = ViewModelMainFactory(repositoryMain)
-
-        viewModelMain = ViewModelProvider(this, viewModelMainFactory)[ViewModelMain::class.java]
-
+        // set navigation host for the bottom navigation
+        // to navigate between fragments
         val bottomNavigation = binding.mainActivityBottomNavigation
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainActivityFragmentHost)
 
         NavigationUI
             .setupWithNavController(bottomNavigation, navHostFragment!!.findNavController())
+
+        val repositoryMain = RepositoryMain(DatabaseNews(this))
+        val viewModelMainFactory = ViewModelMainFactory(repositoryMain)
+
+        viewModelMain = ViewModelProvider(this, viewModelMainFactory)[ViewModelMain::class.java]
     }
 }
