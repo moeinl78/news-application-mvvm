@@ -16,7 +16,7 @@ class FragmentSearch : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
+        binding = FragmentSearchBinding.inflate(layoutInflater, container , false)
         return binding.root
     }
 

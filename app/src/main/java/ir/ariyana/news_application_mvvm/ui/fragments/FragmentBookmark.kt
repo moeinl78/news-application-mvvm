@@ -16,7 +16,7 @@ class FragmentBookmark : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBookmarkBinding.inflate(layoutInflater)
+        binding = FragmentBookmarkBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

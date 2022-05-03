@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragmentNews">
+
+    <fragment
+        android:id="@+id/fragmentNews"
+        android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentNews"
+        android:label="FragmentNews" />
+    <fragment
+        android:id="@+id/fragmentSearch"
+        android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentSearch"
+        android:label="FragmentSearch" />
+    <fragment
+        android:id="@+id/fragmentBookmark"
+        android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentBookmark"
+        android:label="FragmentBookmark" />
+</navigation>
