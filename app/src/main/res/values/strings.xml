@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">news-application-mvvm</string>
+    <string name="breaking_news">Breaking News</string>
+    <string name="search_news">Search News</string>
+    <string name="bookmarked">Bookmarked</string>
 </resources>
