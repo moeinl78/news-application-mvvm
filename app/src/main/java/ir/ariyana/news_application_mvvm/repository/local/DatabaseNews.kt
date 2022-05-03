@@ -1,8 +1,8 @@
-package ir.ariyana.news_application_mvvm.local
+package ir.ariyana.news_application_mvvm.repository.local
 
 import android.content.Context
 import androidx.room.*
-import ir.ariyana.news_application_mvvm.model.Article
+import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.utils.Converters
 
 @Database(entities = [Article::class], version = 1, exportSchema = false)

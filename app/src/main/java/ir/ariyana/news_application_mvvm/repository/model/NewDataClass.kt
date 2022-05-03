@@ -1,4 +1,4 @@
-package ir.ariyana.news_application_mvvm.model
+package ir.ariyana.news_application_mvvm.repository.model
 
 
 import com.google.gson.annotations.SerializedName

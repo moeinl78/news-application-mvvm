@@ -1,4 +1,4 @@
-package ir.ariyana.news_application_mvvm.api
+package ir.ariyana.news_application_mvvm.repository.api
 
 import ir.ariyana.news_application_mvvm.utils.Constants
 import okhttp3.OkHttpClient

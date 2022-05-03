@@ -1,7 +1,7 @@
 package ir.ariyana.news_application_mvvm.utils
 
 import androidx.room.TypeConverter
-import ir.ariyana.news_application_mvvm.model.NewDataClass
+import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 
 class Converters {
 

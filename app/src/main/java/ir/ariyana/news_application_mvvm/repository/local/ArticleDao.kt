@@ -1,4 +1,4 @@
-package ir.ariyana.news_application_mvvm.local
+package ir.ariyana.news_application_mvvm.repository.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,7 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import ir.ariyana.news_application_mvvm.model.Article
+import ir.ariyana.news_application_mvvm.repository.model.Article
 
 @Dao
 interface ArticleDao {

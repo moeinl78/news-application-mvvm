@@ -1,6 +1,6 @@
-package ir.ariyana.news_application_mvvm.api
+package ir.ariyana.news_application_mvvm.repository.api
 
-import ir.ariyana.news_application_mvvm.model.NewDataClass
+import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
