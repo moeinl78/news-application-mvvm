@@ -19,7 +19,11 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
 
     var breakingNewsPage = 1
 
-    fun getBreakingNews(countryCode : String) {
+    init {
+        getBreakingNews("uk")
+    }
+
+    private fun getBreakingNews(countryCode : String) {
         viewModelScope.launch {
             _breakingNewsData.postValue(Resource.Loading())
             val response = repositoryMain.getBreakingNews(countryCode, breakingNewsPage)
