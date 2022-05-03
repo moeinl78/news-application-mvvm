@@ -28,7 +28,7 @@ class ManagerAPI {
                 .build()
         }
 
-        private val api by lazy {
+        val api by lazy {
             retrofit.create(ServiceAPI::class.java)
         }
     }
