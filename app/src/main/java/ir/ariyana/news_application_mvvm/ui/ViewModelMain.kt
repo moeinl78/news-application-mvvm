@@ -13,10 +13,6 @@ import retrofit2.Response
 class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
 
     private val _breakingNewsData = MutableLiveData<Resource<NewDataClass>>()
-    private val _progressBar = MutableLiveData<Resource<NewDataClass>>()
-
-    val progressBar : LiveData<Resource<NewDataClass>>
-        get() = _progressBar
 
     val breakingNewsData : LiveData<Resource<NewDataClass>>
         get() = _breakingNewsData
@@ -25,9 +21,9 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
 
     fun getBreakingNews(countryCode : String) {
         viewModelScope.launch {
-            _progressBar.postValue(Resource.Loading())
+            _breakingNewsData.postValue(Resource.Loading())
             val response = repositoryMain.getBreakingNews(countryCode, breakingNewsPage)
-            handleBreakingNewsResponse(response)
+            _breakingNewsData.postValue(handleBreakingNewsResponse(response))
         }
     }
 
