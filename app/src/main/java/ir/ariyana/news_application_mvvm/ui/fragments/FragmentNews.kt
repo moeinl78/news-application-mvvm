@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.news_application_mvvm.databinding.FragmentBreakingNewsBinding
 import ir.ariyana.news_application_mvvm.ui.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
+import ir.ariyana.news_application_mvvm.utils.Resource
 
 class FragmentNews : Fragment() {
 
@@ -33,23 +35,45 @@ class FragmentNews : Fragment() {
 
         setupRecyclerView()
 
-        viewModelMain.getBreakingNews("us")
+        viewModelMain.breakingNewsData.observe(viewLifecycleOwner, Observer { response ->
 
+            when(response) {
+
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let { newsResponse ->
+                        adapter.differ.submitList(newsResponse.articles)
+                    }
+                }
+
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let {
+
+                    }
+                }
+
+                is Resource.Loading -> {
+                    showProgressBar()
+
+                }
+            }
+        })
     }
 
     private fun setupRecyclerView() {
         adapter = AdapterNews()
-        binding.fragmentSearchRecyclerView.apply {
+        binding.fragmentNewsRecyclerView.apply {
             adapter = adapter
             layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
         }
     }
 
     private fun hideProgressBar() {
-
+        binding.fragmentNewsProgressBar.visibility = View.GONE
     }
 
     private fun showProgressBar() {
-
+        binding.fragmentNewsProgressBar.visibility = View.VISIBLE
     }
 }

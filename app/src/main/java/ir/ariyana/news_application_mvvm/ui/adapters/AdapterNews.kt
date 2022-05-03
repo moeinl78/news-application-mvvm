@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.ariyana.news_application_mvvm.databinding.ItemRecyclerBinding
-import ir.ariyana.news_application_mvvm.repository.model.Article
+import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 
 class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item : Article) {
+        fun bind(item: NewDataClass.Article) {
 
             binding.itemRecyclerTitleText.text = item.title
             binding.itemRecyclerContentText.text = item.content
@@ -35,18 +35,24 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
      * you need to use diffUtil
      * to compare data and see which one's are new!
      */
-    private val diffUtil = object : DiffUtil.ItemCallback<Article>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<NewDataClass.Article>() {
 
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areItemsTheSame(
+            oldItem: NewDataClass.Article,
+            newItem: NewDataClass.Article
+        ): Boolean {
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areContentsTheSame(
+            oldItem: NewDataClass.Article,
+            newItem: NewDataClass.Article
+        ): Boolean {
             return oldItem == newItem
         }
     }
 
-    private val differ = AsyncListDiffer(this, diffUtil)
+    val differ = AsyncListDiffer(this, diffUtil)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -61,9 +67,9 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener : ((Article) -> Unit)? = null
+    private var onItemClickListener : ((NewDataClass.Article) -> Unit)? = null
 
-    fun setArticleClickListener(listener : (Article) -> Unit) {
+    fun setArticleClickListener(listener : (NewDataClass.Article) -> Unit) {
         onItemClickListener = listener
     }
 }
