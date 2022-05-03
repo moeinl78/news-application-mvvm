@@ -1,19 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation"
-    app:startDestination="@id/fragmentNews">
+    app:startDestination="@id/fragmentNews"
+    >
 
     <fragment
         android:id="@+id/fragmentNews"
         android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentNews"
-        android:label="FragmentNews" />
+        android:label="FragmentNews"
+        >
+
+        <action
+            android:id="@+id/action_fragmentNews_to_fragmentArticle"
+            app:destination="@id/fragmentArticle"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+
+    </fragment>
+
     <fragment
         android:id="@+id/fragmentSearch"
         android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentSearch"
-        android:label="FragmentSearch" />
+        android:label="FragmentSearch"
+        >
+
+        <action
+            android:id="@+id/action_fragmentSearch_to_fragmentArticle"
+            app:destination="@id/fragmentArticle"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+
+    </fragment>
+
     <fragment
         android:id="@+id/fragmentBookmark"
         android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentBookmark"
-        android:label="FragmentBookmark" />
+        android:label="FragmentBookmark"
+        >
+
+        <action
+            android:id="@+id/action_fragmentBookmark_to_fragmentArticle"
+            app:destination="@id/fragmentArticle"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentArticle"
+        android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentArticle"
+        android:label="FragmentArticle"
+        />
+    
 </navigation>
