@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.ariyana.news_application_mvvm.repository.RepositoryMain
+import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.utils.Resource
 import kotlinx.coroutines.launch
@@ -41,6 +42,16 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
             _searchNewsData.postValue(handleNewsResponse(response))
         }
     }
+
+    fun insertArticle(article: Article) = viewModelScope.launch {
+        repositoryMain.insertArticle(article)
+    }
+
+    fun removeArticle(article: Article) = viewModelScope.launch {
+        repositoryMain.removeArticle(article)
+    }
+
+    fun receiveArticles() = repositoryMain.receiveArticles()
 
     private fun handleNewsResponse(response : Response<NewDataClass>) : Resource<NewDataClass> {
 
