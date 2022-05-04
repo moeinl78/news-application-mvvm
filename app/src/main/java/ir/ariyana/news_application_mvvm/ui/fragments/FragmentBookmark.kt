@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentBookmarkBinding
-import ir.ariyana.news_application_mvvm.ui.ViewModelMain
+import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 
 class FragmentBookmark : Fragment() {
 

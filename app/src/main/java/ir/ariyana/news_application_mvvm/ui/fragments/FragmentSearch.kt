@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.news_application_mvvm.databinding.FragmentSearchBinding
-import ir.ariyana.news_application_mvvm.ui.ViewModelMain
+import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.utils.Constants
 import ir.ariyana.news_application_mvvm.utils.Resource

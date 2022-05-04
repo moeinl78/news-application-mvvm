@@ -1,4 +1,4 @@
-package ir.ariyana.news_application_mvvm.ui
+package ir.ariyana.news_application_mvvm.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

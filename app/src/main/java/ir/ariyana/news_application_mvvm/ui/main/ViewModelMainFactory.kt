@@ -1,4 +1,4 @@
-package ir.ariyana.news_application_mvvm.ui
+package ir.ariyana.news_application_mvvm.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
