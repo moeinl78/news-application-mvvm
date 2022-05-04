@@ -61,6 +61,10 @@
         android:id="@+id/fragmentArticle"
         android:name="ir.ariyana.news_application_mvvm.ui.fragments.FragmentArticle"
         android:label="FragmentArticle"
-        />
+        >
+        <argument
+            android:name="article"
+            app:argType="ir.ariyana.news_application_mvvm.repository.model.NewDataClass$Article" />
+    </fragment>
     
 </navigation>

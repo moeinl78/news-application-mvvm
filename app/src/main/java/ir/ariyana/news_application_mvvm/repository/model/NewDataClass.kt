@@ -2,6 +2,7 @@ package ir.ariyana.news_application_mvvm.repository.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class NewDataClass(
     @SerializedName("articles")
@@ -28,7 +29,7 @@ data class NewDataClass(
         val url: String,
         @SerializedName("urlToImage")
         val urlToImage: String
-    ) {
+    ) : Serializable {
         data class Source(
             @SerializedName("id")
             val id: Any,
