@@ -13,11 +13,14 @@ import retrofit2.Response
 class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
 
     private val _breakingNewsData = MutableLiveData<Resource<NewDataClass>>()
+    private val _searchNewsData = MutableLiveData<Resource<NewDataClass>>()
+    private var breakingNewsPage = 1
 
+    // use this technique to avoid changing data from ui controller
     val breakingNewsData : LiveData<Resource<NewDataClass>>
         get() = _breakingNewsData
-
-    var breakingNewsPage = 1
+    val searchNewsData : LiveData<Resource<NewDataClass>>
+        get() = _searchNewsData
 
     init {
         getBreakingNews("us")
@@ -27,11 +30,19 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
         viewModelScope.launch {
             _breakingNewsData.postValue(Resource.Loading())
             val response = repositoryMain.getBreakingNews(countryCode, breakingNewsPage)
-            _breakingNewsData.postValue(handleBreakingNewsResponse(response))
+            _breakingNewsData.postValue(handleNewsResponse(response))
         }
     }
 
-    private fun handleBreakingNewsResponse(response : Response<NewDataClass>) : Resource<NewDataClass> {
+    fun getSearchedNews(query : String) {
+        viewModelScope.launch {
+            _searchNewsData.postValue(Resource.Loading())
+            val response = repositoryMain.getSearchNews(query, breakingNewsPage)
+            _searchNewsData.postValue(handleNewsResponse(response))
+        }
+    }
+
+    private fun handleNewsResponse(response : Response<NewDataClass>) : Resource<NewDataClass> {
 
         if(response.isSuccessful) {
             response.body()?.let { res ->
