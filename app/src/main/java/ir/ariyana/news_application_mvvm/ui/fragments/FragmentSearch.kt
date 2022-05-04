@@ -9,9 +9,12 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentSearchBinding
+import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.utils.Constants
@@ -41,6 +44,13 @@ class FragmentSearch : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+
+        adapterSearch.setArticleClickListener { article ->
+            val bundle = Bundle().apply {
+                putSerializable(Constants.BUNDLE_KEY, article)
+            }
+            findNavController().navigate(R.id.action_fragmentSearch_to_fragmentArticle, bundle)
+        }
 
         var job : Job?= null
 

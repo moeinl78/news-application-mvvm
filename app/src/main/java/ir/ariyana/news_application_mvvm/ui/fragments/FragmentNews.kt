@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentBreakingNewsBinding
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
@@ -36,6 +38,13 @@ class FragmentNews : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+
+        adapter.setArticleClickListener { article ->
+            val bundle = Bundle().apply {
+                putSerializable(Constants.BUNDLE_KEY, article)
+            }
+            findNavController().navigate(R.id.action_fragmentSearch_to_fragmentArticle, bundle)
+        }
 
         viewModelMain.breakingNewsData.observe(viewLifecycleOwner, Observer { response ->
 
