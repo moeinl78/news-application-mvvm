@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.ariyana.news_application_mvvm.databinding.ItemRecyclerBinding
+import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.utils.Constants.TAG_MAIN
 
@@ -53,7 +54,25 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
         }
     }
 
+    private val differCallback2 = object : DiffUtil.ItemCallback<Article>() {
+
+        override fun areItemsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ): Boolean {
+            return oldItem.url == newItem.url
+        }
+
+        override fun areContentsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
+
     val differ = AsyncListDiffer(this, differCallback)
+    val differ2 = AsyncListDiffer(this, differCallback2)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
