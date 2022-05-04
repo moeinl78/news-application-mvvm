@@ -8,6 +8,6 @@ class RepositoryMain(private val db : DatabaseNews) {
     suspend fun getBreakingNews(countryCode : String, pageNumber : Int) =
         ManagerAPI.api.getBreakingNews(countryCode, pageNumber)
 
-    suspend fun getSearchNews(query : String) =
-        ManagerAPI.api.getSearchedNews(query)
+    suspend fun getSearchNews(query : String, pageNumber: Int) =
+        ManagerAPI.api.getSearchedNews(query, pageNumber)
 }

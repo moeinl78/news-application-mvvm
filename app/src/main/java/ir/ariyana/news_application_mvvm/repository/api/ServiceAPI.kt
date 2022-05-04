@@ -17,7 +17,8 @@ interface ServiceAPI {
 
     @GET("everything")
     suspend fun getSearchedNews(
-        @Query("q")
-        query : String
+        @Query("q") query : String,
+        @Query("page") page : Int = 1,
+        @Query("apiKey") apiKey : String = Constants.API_KEY
     ) : Response<NewDataClass>
 }
