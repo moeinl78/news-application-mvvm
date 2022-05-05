@@ -25,6 +25,10 @@ class AdapterNews(private val events: Events) : RecyclerView.Adapter<AdapterNews
                 .with(binding.root.context)
                 .load(item.urlToImage)
                 .into(binding.itemRecyclerImageNews)
+
+            itemView.setOnClickListener {
+                events.onItemClick(item)
+            }
         }
     }
 
@@ -76,9 +80,6 @@ class AdapterNews(private val events: Events) : RecyclerView.Adapter<AdapterNews
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
-            events.onItemClick(differ.currentList[position])
-        }
         holder.bind(differ.currentList[position])
     }
 

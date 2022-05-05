@@ -11,6 +11,7 @@
     android:layout_marginStart="8dp"
     android:clickable="true"
     android:focusable="true"
+    android:background="?attr/selectableItemBackground"
     app:strokeWidth="2dp"
     app:strokeColor="@android:color/darker_gray"
     >
@@ -19,9 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
         >
 
         <LinearLayout

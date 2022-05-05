@@ -80,7 +80,6 @@ class FragmentNews : Fragment(), AdapterNews.Events {
     }
 
     override fun onItemClick(article: NewDataClass.Article) {
-        Toast.makeText(binding.root.context, "ok", Toast.LENGTH_SHORT).show()
         val bundle = Bundle().apply {
             putSerializable(Constants.BUNDLE_KEY, article)
         }
