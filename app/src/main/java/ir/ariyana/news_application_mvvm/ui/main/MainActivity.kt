@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             .setupWithNavController(bottomNavigation, navHostFragment!!.findNavController())
 
         val repositoryMain = RepositoryMain(DatabaseNews(this))
-        val viewModelMainFactory = ViewModelMainFactory(repositoryMain)
+        val viewModelMainFactory = ViewModelMainFactory(application, repositoryMain)
 
         viewModelMain = ViewModelProvider(this, viewModelMainFactory)[ViewModelMain::class.java]
     }
