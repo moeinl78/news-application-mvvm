@@ -6,7 +6,7 @@ import java.io.Serializable
 
 data class NewDataClass(
     @SerializedName("articles")
-    val articles: List<Article>,
+    val articles: MutableList<Article>,
     @SerializedName("status")
     val status: String,
     @SerializedName("totalResults")

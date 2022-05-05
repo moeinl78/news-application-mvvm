@@ -15,13 +15,18 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
 
     private val _breakingNewsData = MutableLiveData<Resource<NewDataClass>>()
     private val _searchNewsData = MutableLiveData<Resource<NewDataClass>>()
+
     private var breakingNewsPage = 1
+    private var searchNewsPage = 1
 
     // use this technique to avoid changing data from ui controller
     val breakingNewsData : LiveData<Resource<NewDataClass>>
         get() = _breakingNewsData
     val searchNewsData : LiveData<Resource<NewDataClass>>
         get() = _searchNewsData
+
+    var breakingNewsResponse : NewDataClass ? = null
+    var searchNewsResponse : NewDataClass ? = null
 
     init {
         getBreakingNews("us")
@@ -38,8 +43,8 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
     fun getSearchedNews(query : String) {
         viewModelScope.launch {
             _searchNewsData.postValue(Resource.Loading())
-            val response = repositoryMain.getSearchNews(query, breakingNewsPage)
-            _searchNewsData.postValue(handleNewsResponse(response))
+            val response = repositoryMain.getSearchNews(query, searchNewsPage)
+            _searchNewsData.postValue(handleSearchedResponse(response))
         }
     }
 
@@ -56,8 +61,40 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
     private fun handleNewsResponse(response : Response<NewDataClass>) : Resource<NewDataClass> {
 
         if(response.isSuccessful) {
+
             response.body()?.let { res ->
-                return Resource.Success(res)
+
+                breakingNewsPage += 1
+                if(breakingNewsResponse == null) {
+                    breakingNewsResponse = res
+                }
+                else {
+                    val oldArticles = breakingNewsResponse?.articles
+                    val newArticles = res.articles
+                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Success(breakingNewsResponse ?: res)
+            }
+        }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleSearchedResponse(response : Response<NewDataClass>) : Resource<NewDataClass> {
+
+        if(response.isSuccessful) {
+
+            response.body()?.let { res ->
+
+                searchNewsPage += 1
+                if(searchNewsResponse == null) {
+                    searchNewsResponse = res
+                }
+                else {
+                    val oldArticles = searchNewsResponse?.articles
+                    val newArticles = res.articles
+                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Success(searchNewsResponse ?: res)
             }
         }
         return Resource.Error(response.message())
