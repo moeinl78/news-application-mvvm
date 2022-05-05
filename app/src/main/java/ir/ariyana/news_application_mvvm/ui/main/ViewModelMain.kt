@@ -16,8 +16,8 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
     private val _breakingNewsData = MutableLiveData<Resource<NewDataClass>>()
     private val _searchNewsData = MutableLiveData<Resource<NewDataClass>>()
 
-    private var breakingNewsPage = 1
-    private var searchNewsPage = 1
+    var breakingNewsPage = 1
+    var searchNewsPage = 1
 
     // use this technique to avoid changing data from ui controller
     val breakingNewsData : LiveData<Resource<NewDataClass>>
@@ -32,7 +32,7 @@ class ViewModelMain(private val repositoryMain: RepositoryMain) : ViewModel() {
         getBreakingNews("us")
     }
 
-    private fun getBreakingNews(countryCode : String) {
+    fun getBreakingNews(countryCode : String) {
         viewModelScope.launch {
             _breakingNewsData.postValue(Resource.Loading())
             val response = repositoryMain.getBreakingNews(countryCode, breakingNewsPage)
