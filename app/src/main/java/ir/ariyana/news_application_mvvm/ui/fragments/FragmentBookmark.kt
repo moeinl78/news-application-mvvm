@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentBookmarkBinding
+import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.utils.Constants
 
-class FragmentBookmark : Fragment() {
+class FragmentBookmark : Fragment(), AdapterNews.Events {
 
     private lateinit var binding : FragmentBookmarkBinding
     private lateinit var viewModelMain: ViewModelMain
@@ -38,13 +39,6 @@ class FragmentBookmark : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-
-        adapter.setArticleClickListener { article ->
-            val bundle = Bundle().apply {
-                putSerializable(Constants.BUNDLE_KEY, article)
-            }
-            findNavController().navigate(R.id.action_fragmentSearch_to_fragmentArticle, bundle)
-        }
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
@@ -84,8 +78,15 @@ class FragmentBookmark : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = AdapterNews()
+        adapter = AdapterNews(this)
         binding.fragmentBookmarkRecyclerView.adapter = adapter
         binding.fragmentBookmarkRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
+    }
+
+    override fun onItemClick(article: NewDataClass.Article) {
+        val bundle = Bundle().apply {
+            putSerializable(Constants.BUNDLE_KEY, article)
+        }
+        findNavController().navigate(R.id.action_fragmentSearch_to_fragmentArticle, bundle)
     }
 }

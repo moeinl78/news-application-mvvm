@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,12 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentBreakingNewsBinding
+import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.utils.Constants
 import ir.ariyana.news_application_mvvm.utils.Resource
 
-class FragmentNews : Fragment() {
+class FragmentNews : Fragment(), AdapterNews.Events {
 
     private lateinit var binding : FragmentBreakingNewsBinding
     private lateinit var viewModelMain: ViewModelMain
@@ -38,13 +40,6 @@ class FragmentNews : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-
-        adapter.setArticleClickListener { article ->
-            val bundle = Bundle().apply {
-                putSerializable(Constants.BUNDLE_KEY, article)
-            }
-            findNavController().navigate(R.id.action_fragmentSearch_to_fragmentArticle, bundle)
-        }
 
         viewModelMain.breakingNewsData.observe(viewLifecycleOwner, Observer { response ->
 
@@ -73,7 +68,7 @@ class FragmentNews : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = AdapterNews()
+        adapter = AdapterNews(this)
         binding.fragmentNewsRecyclerView.adapter = adapter
         binding.fragmentNewsRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
     }
@@ -84,5 +79,13 @@ class FragmentNews : Fragment() {
 
     private fun showProgressBar() {
         binding.fragmentNewsProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun onItemClick(article: NewDataClass.Article) {
+        Toast.makeText(binding.root.context, "ok", Toast.LENGTH_SHORT).show()
+        val bundle = Bundle().apply {
+            putSerializable(Constants.BUNDLE_KEY, article)
+        }
+        findNavController().navigate(R.id.action_fragmentNews_to_fragmentArticle, bundle)
     }
 }

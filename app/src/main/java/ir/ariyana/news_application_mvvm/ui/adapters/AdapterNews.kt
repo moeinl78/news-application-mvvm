@@ -12,7 +12,7 @@ import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.utils.Constants.TAG_MAIN
 
-class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
+class AdapterNews(private val events: Events) : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -25,10 +25,6 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
                 .with(binding.root.context)
                 .load(item.urlToImage)
                 .into(binding.itemRecyclerImageNews)
-
-            itemView.setOnClickListener {
-                onItemClickListener?.let { it(item) }
-            }
         }
     }
 
@@ -80,6 +76,9 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            events.onItemClick(differ.currentList[position])
+        }
         holder.bind(differ.currentList[position])
     }
 
@@ -88,9 +87,7 @@ class AdapterNews : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener : ((NewDataClass.Article) -> Unit)? = null
-
-    fun setArticleClickListener(listener : (NewDataClass.Article) -> Unit) {
-        onItemClickListener = listener
+    interface Events {
+        fun onItemClick(article : NewDataClass.Article)
     }
 }

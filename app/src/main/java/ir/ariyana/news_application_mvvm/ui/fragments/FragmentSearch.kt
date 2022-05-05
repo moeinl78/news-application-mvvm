@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentSearchBinding
 import ir.ariyana.news_application_mvvm.repository.model.Article
+import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.utils.Constants
@@ -24,7 +25,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class FragmentSearch : Fragment() {
+class FragmentSearch : Fragment(), AdapterNews.Events {
 
     private lateinit var binding : FragmentSearchBinding
     private lateinit var viewModelMain: ViewModelMain
@@ -44,13 +45,6 @@ class FragmentSearch : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-
-        adapterSearch.setArticleClickListener { article ->
-            val bundle = Bundle().apply {
-                putSerializable(Constants.BUNDLE_KEY, article)
-            }
-            findNavController().navigate(R.id.action_fragmentSearch_to_fragmentArticle, bundle)
-        }
 
         var job : Job?= null
 
@@ -93,7 +87,7 @@ class FragmentSearch : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapterSearch = AdapterNews()
+        adapterSearch = AdapterNews(this)
         binding.fragmentSearchRecyclerView.adapter = adapterSearch
         binding.fragmentSearchRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
     }
@@ -104,5 +98,12 @@ class FragmentSearch : Fragment() {
 
     private fun showProgressBar() {
         binding.fragmentSearchProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun onItemClick(article: NewDataClass.Article) {
+        val bundle = Bundle().apply {
+            putSerializable(Constants.BUNDLE_KEY, article)
+        }
+        findNavController().navigate(R.id.action_fragmentSearch_to_fragmentArticle, bundle)
     }
 }
