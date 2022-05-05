@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentSearchBinding
 import ir.ariyana.news_application_mvvm.repository.model.Article
@@ -78,7 +79,11 @@ class FragmentSearch : Fragment(), AdapterNews.Events {
 
                     is Resource.Error -> {
                         hideProgressBar()
-                        Log.e(Constants.TAG_MAIN, response.message!!)
+                        response.message?.let {
+                            Snackbar
+                                .make(view, it, Snackbar.LENGTH_LONG)
+                                .show()
+                        }
                     }
 
                     is Resource.Loading -> {

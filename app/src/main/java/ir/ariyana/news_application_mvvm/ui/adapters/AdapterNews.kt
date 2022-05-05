@@ -54,25 +54,7 @@ class AdapterNews(private val events: Events) : RecyclerView.Adapter<AdapterNews
         }
     }
 
-    private val differCallback2 = object : DiffUtil.ItemCallback<Article>() {
-
-        override fun areItemsTheSame(
-            oldItem: Article,
-            newItem: Article
-        ): Boolean {
-            return oldItem.url == newItem.url
-        }
-
-        override fun areContentsTheSame(
-            oldItem: Article,
-            newItem: Article
-        ): Boolean {
-            return oldItem == newItem
-        }
-    }
-
     val differ = AsyncListDiffer(this, differCallback)
-    val differ2 = AsyncListDiffer(this, differCallback2)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentBookmarkBinding
+import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
@@ -40,41 +41,41 @@ class FragmentBookmark : Fragment(), AdapterNews.Events {
 
         setupRecyclerView()
 
-        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-            ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
-        ) {
+//        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+//            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+//            ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
+//        ) {
+//
+//            override fun onMove(
+//                recyclerView: RecyclerView,
+//                viewHolder: RecyclerView.ViewHolder,
+//                target: RecyclerView.ViewHolder
+//            ): Boolean {
+//                return true
+//            }
+//
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                val position = viewHolder.adapterPosition
+//                val article = adapter.differ.currentList[position]
+//                viewModelMain.removeArticle(article)
+//                Snackbar
+//                    .make(view, "article removed successfully from database", Snackbar.LENGTH_SHORT)
+//                    .setAction("Undo") {
+//                        viewModelMain.insertArticle(article)
+//                    }
+//                    .show()
+//            }
+//        }
 
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return true
-            }
+//        ItemTouchHelper(itemTouchHelperCallback).apply {
+//            attachToRecyclerView(binding.fragmentBookmarkRecyclerView)
+//        }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                val article = adapter.differ2.currentList[position]
-                viewModelMain.removeArticle(article)
-                Snackbar
-                    .make(view, "article removed successfully from database", Snackbar.LENGTH_SHORT)
-                    .setAction("Undo") {
-                        viewModelMain.insertArticle(article)
-                    }
-                    .show()
-            }
-        }
-
-        ItemTouchHelper(itemTouchHelperCallback).apply {
-            attachToRecyclerView(binding.fragmentBookmarkRecyclerView)
-        }
-
-        viewModelMain
-            .receiveArticles()
-            .observe(viewLifecycleOwner, Observer { articles ->
-                adapter.differ2.submitList(articles)
-            })
+//        viewModelMain
+//            .receiveArticles()
+//            .observe(viewLifecycleOwner, Observer { articles ->
+//                adapter.differ.submitList(articles)
+//            })
     }
 
     private fun setupRecyclerView() {
