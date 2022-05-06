@@ -6,8 +6,18 @@ This project covers topics below!
     MVVM , Retrofit, LiveData, ViewModel, Room, Coroutine, Glide, Navigation Component etc
 ```
 
-## Add dependencies to the project 
+## Add dependencies to the project
 ```kotlin
+// Add these plugins to the gradle.build file
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs'
+}
+
+// Dependencies
 dependencies {
 
     // ROOM
@@ -39,6 +49,19 @@ dependencies {
     // GLIDE
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
+}
+
+// Add this dependency to the top-level build of the project
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral()
+
+    }
+    dependencies {
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2")
+    }
 }
 ```
 
