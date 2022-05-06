@@ -1,17 +1,17 @@
 package ir.ariyana.news_application_mvvm.utils
 
 import androidx.room.TypeConverter
-import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
+import ir.ariyana.news_application_mvvm.repository.model.Source
 
 class Converters {
 
     @TypeConverter
-    fun fromSource(source : NewDataClass.Article.Source): String {
+    fun fromSource(source : Source): String {
         return source.name
     }
 
     @TypeConverter
-    fun toSource(name : String) : NewDataClass.Article.Source {
-        return NewDataClass.Article.Source(name, name)
+    fun toSource(name : String) : Source {
+        return Source(name, name)
     }
 }
