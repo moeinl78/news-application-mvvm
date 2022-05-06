@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
-import ir.ariyana.news_application_mvvm.databinding.ActivityMainBinding
 import ir.ariyana.news_application_mvvm.databinding.FragmentArticleBinding
 import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
@@ -41,19 +40,8 @@ class FragmentArticle : Fragment() {
         }
 
         binding.fragmentArticleSaveFab.setOnClickListener {
-            val newArticle = Article(
-                null,
-                article.author,
-                article.content,
-                article.description,
-                article.publishedAt,
-                article.source,
-                article.title,
-                article.url,
-                article.urlToImage
-            )
             viewModelMain
-                .insertArticle(newArticle)
+                .insertArticle(article)
 
             Snackbar
                 .make(view, "Saved to database Successfully", Snackbar.LENGTH_SHORT)

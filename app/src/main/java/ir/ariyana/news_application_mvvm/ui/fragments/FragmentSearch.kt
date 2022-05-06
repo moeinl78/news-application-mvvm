@@ -1,7 +1,6 @@
 package ir.ariyana.news_application_mvvm.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentSearchBinding
 import ir.ariyana.news_application_mvvm.repository.model.Article
-import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.utils.Constants
@@ -103,7 +101,7 @@ class FragmentSearch : Fragment(), AdapterNews.Events {
         isLoading = true
     }
 
-    override fun onItemClick(article: NewDataClass.Article) {
+    override fun onItemClick(article: Article) {
         val bundle = Bundle().apply {
             putSerializable(Constants.BUNDLE_KEY, article)
         }

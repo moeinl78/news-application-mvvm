@@ -1,12 +1,10 @@
 package ir.ariyana.news_application_mvvm.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import ir.ariyana.news_application_mvvm.R
 import ir.ariyana.news_application_mvvm.databinding.FragmentBreakingNewsBinding
-import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
+import ir.ariyana.news_application_mvvm.repository.model.Article
 import ir.ariyana.news_application_mvvm.ui.main.ViewModelMain
 import ir.ariyana.news_application_mvvm.ui.adapters.AdapterNews
 import ir.ariyana.news_application_mvvm.utils.Constants
@@ -82,7 +80,7 @@ class FragmentNews : Fragment(), AdapterNews.Events {
         isLoading = true
     }
 
-    override fun onItemClick(article: NewDataClass.Article) {
+    override fun onItemClick(article: Article) {
         val bundle = Bundle().apply {
             putSerializable(Constants.BUNDLE_KEY, article)
         }
