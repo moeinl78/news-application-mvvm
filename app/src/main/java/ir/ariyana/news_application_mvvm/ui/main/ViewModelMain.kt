@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.ariyana.news_application_mvvm.repository.RepositoryMain
 import ir.ariyana.news_application_mvvm.repository.model.Article
-import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
+import ir.ariyana.news_application_mvvm.repository.model.News
 import ir.ariyana.news_application_mvvm.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -20,20 +20,20 @@ import java.io.IOException
 
 class ViewModelMain(private val app : Application, private val repositoryMain: RepositoryMain) : ViewModel() {
 
-    private val _breakingNewsData = MutableLiveData<Resource<NewDataClass>>()
-    private val _searchNewsData = MutableLiveData<Resource<NewDataClass>>()
+    private val _breakingNewsData = MutableLiveData<Resource<News>>()
+    private val _searchNewsData = MutableLiveData<Resource<News>>()
 
     var breakingNewsPage = 1
     var searchNewsPage = 1
 
     // use this technique to avoid changing data from ui controller
-    val breakingNewsData : LiveData<Resource<NewDataClass>>
+    val breakingNewsData : LiveData<Resource<News>>
         get() = _breakingNewsData
-    val searchNewsData : LiveData<Resource<NewDataClass>>
+    val searchNewsData : LiveData<Resource<News>>
         get() = _searchNewsData
 
-    var breakingNewsResponse : NewDataClass ? = null
-    var searchNewsResponse : NewDataClass ? = null
+    var breakingNewsResponse : News ? = null
+    var searchNewsResponse : News ? = null
 
     init {
         getBreakingNews("us")
@@ -57,7 +57,7 @@ class ViewModelMain(private val app : Application, private val repositoryMain: R
 
     fun receiveArticles() = repositoryMain.receiveArticles()
 
-    private fun handleNewsResponse(response : Response<NewDataClass>) : Resource<NewDataClass> {
+    private fun handleNewsResponse(response : Response<News>) : Resource<News> {
 
         if(response.isSuccessful) {
 
@@ -78,7 +78,7 @@ class ViewModelMain(private val app : Application, private val repositoryMain: R
         return Resource.Error(response.message())
     }
 
-    private fun handleSearchedResponse(response : Response<NewDataClass>) : Resource<NewDataClass> {
+    private fun handleSearchedResponse(response : Response<News>) : Resource<News> {
 
         if(response.isSuccessful) {
 
