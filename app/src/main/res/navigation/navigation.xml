@@ -64,7 +64,7 @@
         >
         <argument
             android:name="article"
-            app:argType="ir.ariyana.news_application_mvvm.repository.model.NewDataClass$Article" />
+            app:argType="ir.ariyana.news_application_mvvm.repository.model.Article" />
     </fragment>
     
 </navigation>

@@ -9,14 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.ariyana.news_application_mvvm.databinding.ItemRecyclerBinding
 import ir.ariyana.news_application_mvvm.repository.model.Article
-import ir.ariyana.news_application_mvvm.repository.model.NewDataClass
 import ir.ariyana.news_application_mvvm.utils.Constants.TAG_MAIN
 
 class AdapterNews(private val events: Events) : RecyclerView.Adapter<AdapterNews.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemRecyclerBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: NewDataClass.Article) {
+        fun bind(item: Article) {
             binding.itemRecyclerTitleText.text = item.title
             binding.itemRecyclerContentText.text = item.content
             binding.itemRecyclerTextSource.text = item.source.name
@@ -37,18 +36,18 @@ class AdapterNews(private val events: Events) : RecyclerView.Adapter<AdapterNews
      * you need to use diffUtil
      * to compare data and see which one's are new!
      */
-    private val differCallback = object : DiffUtil.ItemCallback<NewDataClass.Article>() {
+    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
 
         override fun areItemsTheSame(
-            oldItem: NewDataClass.Article,
-            newItem: NewDataClass.Article
+            oldItem: Article,
+            newItem: Article
         ): Boolean {
             return oldItem.url == newItem.url
         }
 
         override fun areContentsTheSame(
-            oldItem: NewDataClass.Article,
-            newItem: NewDataClass.Article
+            oldItem: Article,
+            newItem: Article
         ): Boolean {
             return oldItem == newItem
         }
@@ -71,6 +70,6 @@ class AdapterNews(private val events: Events) : RecyclerView.Adapter<AdapterNews
     }
 
     interface Events {
-        fun onItemClick(article : NewDataClass.Article)
+        fun onItemClick(article : Article)
     }
 }
